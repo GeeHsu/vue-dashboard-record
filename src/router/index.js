@@ -8,10 +8,15 @@ import Dashboard from '@/components/Dashboard'
 import Login from '@/components/pages/Login'
 // 把 Product給載進來
 import Products from '@/components/pages/Products'
+// 把 Order給載進來
+import Orders from '@/components/pages/Orders'
+// 把 Coupon給載進來
+import Coupons from '@/components/pages/Coupons'
 
 Vue.use(Router)
 
 export default new Router({
+  linkActiveClass: 'active',
   routes: [
     // 重新導向
     {
@@ -42,6 +47,20 @@ export default new Router({
           path: 'products',
           name: 'Products',
           component: Products,
+          meta: { requiresAuth: true },
+        },
+        // Orders的路徑
+        {
+          path: 'orders',
+          name: 'Orders',
+          component: Orders,
+          meta: { requiresAuth: true },
+        },
+        // Coupons的路徑
+        {
+          path: 'coupons',
+          name: 'Coupons',
+          component: Coupons,
           meta: { requiresAuth: true },
         },
       ],

@@ -43,7 +43,8 @@ export default {
       this.$http.post(api).then((response) => {
         // console.log(response.data);
         if (response.data.success) {
-          vm.$router.push('/login');
+          // vm.$router.push('/login');
+          vm.$router.push('/signin');
         }
       });
     }
