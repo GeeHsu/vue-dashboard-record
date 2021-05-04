@@ -2,16 +2,18 @@ import Vue from 'vue'
 import Router from 'vue-router'
 // 之後都不會用到，可以直接移除
 // import HelloWorld from '@/components/HelloWorld'
-// 把 Dashboard給載進來
+// 把Dashboard給載進來
 import Dashboard from '@/components/Dashboard'
 // 把Login給載進來
 import Login from '@/components/pages/Login'
-// 把 Product給載進來
+// 把Product給載進來
 import Products from '@/components/pages/Products'
-// 把 Order給載進來
+// 把Order給載進來
 import Orders from '@/components/pages/Orders'
-// 把 Coupon給載進來
+// 把Coupon給載進來
 import Coupons from '@/components/pages/Coupons'
+// 把CustomerOrder給載進來
+import CustomerOrder from '@/components/pages/CustomerOrders' 
 
 Vue.use(Router)
 
@@ -42,6 +44,8 @@ export default new Router({
       path: '/admin',
       name: 'Dashboard',
       component: Dashboard,
+      // 設定 meta 是否需要驗證
+      meta: { requiresAuth: true },
       children: [
         {
           path: 'products',
@@ -62,6 +66,22 @@ export default new Router({
           name: 'Coupons',
           component: Coupons,
           meta: { requiresAuth: true },
+        },
+      ],
+    },
+    // 客戶購物的路徑(使用與Dashboard相同的模板)
+    {
+      path: '/',
+      name: 'Dashboard',
+      component: Dashboard,
+      // 設定 meta 是否需要驗證
+      meta: { requiresAuth: true },
+      children: [
+        // CustomerOrder的路徑
+        {
+          path: 'customer_order',
+          name: 'CustomerOrder',
+          component: CustomerOrder,
         },
       ],
     },
