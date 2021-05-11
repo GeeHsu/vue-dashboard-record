@@ -23,7 +23,8 @@ export default new Router({
     // 重新導向
     {
       path: '*',
-      redirect: 'login',
+      // redirect: 'login',
+      redirect: 'shop/customer_order',
     },
     // 之後都不會用到，可以直接移除
     // // 首頁的路徑
@@ -71,8 +72,10 @@ export default new Router({
     },
     // 客戶購物的路徑(使用與Dashboard相同的模板)
     {
-      path: '/',
-      name: 'Dashboard',
+      // path: '/',
+      // name: 'Dashboard',
+      path: '/shop',
+      name: 'DashboardCustomerOrder',
       component: Dashboard,
       // 設定 meta 是否需要驗證
       meta: { requiresAuth: true },

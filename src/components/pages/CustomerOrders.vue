@@ -25,7 +25,8 @@
               <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
               查看更多
             </button>
-            <button type="button" class="btn btn-outline-danger btn-sm ml-auto">
+            <button type="button" class="btn btn-outline-danger btn-sm ml-auto"
+              @click="addtoCart(item.id)">
               <i class="fas fa-spinner fa-spin" v-if="status.loadingItem === item.id"></i>
               加到購物車
             </button>
@@ -65,7 +66,8 @@
             <div class="text-muted text-nowrap mr-3">
               小計 <strong>{{ product.num * product.price }}</strong> 元
             </div>
-            <button type="button" class="btn btn-primary">
+            <button type="button" class="btn btn-primary"
+              @click="addtoCart(product.id, product.num)">
               <!-- <i class="fas fa-spinner fa-spin" v-if="product.id === status.loadingItem"></i> -->
               加到購物車
             </button>
@@ -116,9 +118,39 @@ export default {
         vm.product.num = 1; // 所有商品初始值設置為 1
       });
     },
+    // 加入購物車
+    addtoCart(id, qty = 1) {
+      const vm = this;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      // vm.isLoading = true;
+      vm.status.loadingItem = id;
+      const cart = {
+        product_id: id,
+        qty,
+      };
+      this.$http.post(url, { data: cart }).then((response) => {
+        console.log(response);
+        // vm.isLoading = false;
+        vm.status.loadingItem = '';
+        vm.getCart();
+        $('#productModal').modal('hide');
+      });
+    },
+    // 取得購物車的內容
+    getCart() {
+      const vm = this;
+      const url = `${process.env.APIPATH}/api/${process.env.CUSTOMPATH}/cart`;
+      vm.isLoading = true;
+      this.$http.get(url).then((response) => {
+        // vm.products = response.data.products;
+        console.log(response);
+        vm.isLoading = false;
+      });
+    },
   },
   created() {
     this.getProducts();
+    this.getCart();
   },
 };
 </script>
