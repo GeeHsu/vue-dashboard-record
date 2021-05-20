@@ -9,6 +9,10 @@ import Loading from 'vue-loading-overlay'
 // import stylesheet
 import 'vue-loading-overlay/dist/vue-loading.css'
 import 'bootstrap'
+// import VeeValidate
+import VeeValidate from 'vee-validate'
+// import 中文語系
+import zhTWValidate from 'vee-validate/dist/locale/zh_TW'
 // 自己撰寫
 import App from './App'
 import router from './router'
@@ -18,6 +22,14 @@ import dateFilter from './filters/date'
 
 Vue.config.productionTip = false
 Vue.use(VueAxios, axios)
+
+// 寫在這無法顯示中文
+// VeeValidate.Validator.localize('zh_TW', zhTWValidate)
+Vue.use(VeeValidate, {
+  events: 'input|blur',
+})
+// 寫在這才能顯示中文
+VeeValidate.Validator.localize('zh_TW', zhTWValidate)
 
 Vue.component('Loading', Loading)
 Vue.filter('currency', currencyFilter)
