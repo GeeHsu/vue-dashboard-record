@@ -14,6 +14,10 @@ import Orders from '@/components/pages/Orders'
 import Coupons from '@/components/pages/Coupons'
 // 把CustomerOrder給載進來
 import CustomerOrder from '@/components/pages/CustomerOrders' 
+// 把CustomerCheckout給載進來
+import CustomerCheckout from '@/components/pages/CustomerCheckout' 
+
+
 
 Vue.use(Router)
 
@@ -38,7 +42,7 @@ export default new Router({
     {
       path: '/login',
       name: 'Login',
-      component: Login
+      component: Login,
     },
     // Dashboard的路徑
     {
@@ -85,6 +89,12 @@ export default new Router({
           path: 'customer_order',
           name: 'CustomerOrder',
           component: CustomerOrder,
+        },
+        // CustomerCheckout的路徑 
+        {
+          path: 'customer_checkout/:orderId',
+          name: 'CustomerCheckout',
+          component: CustomerCheckout,
         },
       ],
     },

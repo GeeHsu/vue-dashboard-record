@@ -206,7 +206,7 @@ export default {
       vm.isLoading = true;
       this.$http.get(url).then((response) => {
         vm.products = response.data.products;
-        console.log(response);
+        // console.log(response);
         vm.isLoading = false;
       });
     },
@@ -219,7 +219,7 @@ export default {
       this.$http.get(url).then((response) => {
         vm.product = response.data.product;
         $('#productModal').modal('show');
-        console.log(response);
+        // console.log(response);
         // vm.isLoading = false;
         vm.status.loadingItem = '';
         vm.product.num = 1; // 所有商品初始值設置為 1
@@ -251,7 +251,7 @@ export default {
       this.$http.get(url).then((response) => {
         // vm.products = response.data.products;
         vm.cart = response.data.data;
-        console.log(response);
+        // console.log(response);
         vm.isLoading = false;
       });
     },
@@ -274,7 +274,7 @@ export default {
       };
       vm.isLoading = true;
       this.$http.post(url, { data: coupon }).then((response) => {
-        console.log(response);
+        // console.log(response);
         vm.getCart();
         vm.isLoading = false;
       });
@@ -289,6 +289,9 @@ export default {
         if (result) {
           this.$http.post(url, { data: order }).then((response) => {
             console.log('訂單已建立', response);
+            if (response.data.success) {
+              vm.$router.push(`/shop/customer_checkout/${response.data.orderId}`);
+            }
             // vm.getCart();
             vm.isLoading = false;
           });
